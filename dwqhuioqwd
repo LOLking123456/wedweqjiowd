@@ -1,0 +1,469 @@
+
+      local Library =
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/xHeptc/Kavo-UI-Library/main/source.lua"))()
+        local Window = Library.CreateLib("Legend HandlesYT | Gas Station Simulator | v4.2 |", "Synapse")
+
+        -- MAIN
+        local Main = Window:NewTab("Main")
+        local MainSection = Main:NewSection("Main")
+        
+MainSection:NewButton("Longarms J ON, K OFF", "J ON, K OFF", function()
+ while wait(.1) do
+ function onKeyPress(inputObject, gameProcessedEvent)
+		if inputObject.KeyCode == Enum.KeyCode.J then
+			local Player = game:GetService("Players").LocalPlayer
+            local Character = Player.Character
+            Character["Right Arm"].Size = Vector3.new(20,2,1)
+            Character["Left Arm"].Size = Vector3.new(20,2,1)
+		end
+end
+  game:GetService("UserInputService").InputBegan:connect(onKeyPress)
+	function onKeyPress(inputObject, gameProcessedEvent)
+		if inputObject.KeyCode == Enum.KeyCode.K then
+			local Player = game:GetService("Players").LocalPlayer
+			local Character = Player.Character
+			Character["Right Arm"].Size = Vector3.new(1,2,1)
+			Character["Left Arm"].Size = Vector3.new(1,2,1)
+		end
+	end
+	game:GetService("UserInputService").InputBegan:connect(onKeyPress)
+	end
+end)
+
+ MainSection:NewSlider("Bypass Jump Power", "Bypassed Jump Power", 150, 60, function(v)
+game.Players.LocalPlayer.Character.Humanoid.JumpPower = v
+ end)
+
+MainSection:NewButton("Auto WALK FE", "AUTO WALKS", function()
+ Player = "LocalPlayer" --- you can still put any player name here
+
+AnimationId = "9566064909" --- add ID's from the bottom[/size]
+local Anim = Instance.new("Animation") --- Creates animation[/size]
+Anim.AnimationId = "rbxassetid://"..AnimationId ---- inserts the ID[/size]
+local k = game.Players[Player].Character.Humanoid:LoadAnimation(Anim) --- makes the animation a function[/size]
+k:Play() --Play the animation ----- Runs the animation.[/size]
+k:AdjustSpeed(1) --Set '1' to any value you want to adjust the animation speed. I suggest keep it here. Looks smoother.[/size]
+end)
+
+MainSection:NewButton("Auto RUN FE", "AUTO RUN", function()
+ Player = "LocalPlayer" --- you can still put any player name here
+
+AnimationId = "9611977918" --- add ID's from the bottom[/size]
+local Anim = Instance.new("Animation") --- Creates animation[/size]
+Anim.AnimationId = "rbxassetid://"..AnimationId ---- inserts the ID[/size]
+local k = game.Players[Player].Character.Humanoid:LoadAnimation(Anim) --- makes the animation a function[/size]
+k:Play() --Play the animation ----- Runs the animation.[/size]
+k:AdjustSpeed(1) --Set '1' to any value you want to adjust the animation speed. I suggest keep it here. Looks smoother.[/size]
+end)
+
+MainSection:NewButton("Auto SIT FE", "AUTO SIT", function()
+ Player = "LocalPlayer" --- you can still put any player name here
+
+AnimationId = "178130996" --- add ID's from the bottom[/size]
+local Anim = Instance.new("Animation") --- Creates animation[/size]
+Anim.AnimationId = "rbxassetid://"..AnimationId ---- inserts the ID[/size]
+local k = game.Players[Player].Character.Humanoid:LoadAnimation(Anim) --- makes the animation a function[/size]
+k:Play() --Play the animation ----- Runs the animation.[/size]
+k:AdjustSpeed(1) --Set '1' to any value you want to adjust the animation speed. I suggest keep it here. Looks smoother.[/size]
+end)
+
+MainSection:NewButton("Auto TOOLNONE FE", "AUTO TOOLNONE", function()
+ Player = "LocalPlayer" --- you can still put any player name here
+
+AnimationId = "182393478" --- add ID's from the bottom[/size]
+local Anim = Instance.new("Animation") --- Creates animation[/size]
+Anim.AnimationId = "rbxassetid://"..AnimationId ---- inserts the ID[/size]
+local k = game.Players[Player].Character.Humanoid:LoadAnimation(Anim) --- makes the animation a function[/size]
+k:Play() --Play the animation ----- Runs the animation.[/size]
+k:AdjustSpeed(1) --Set '1' to any value you want to adjust the animation speed. I suggest keep it here. Looks smoother.[/size]
+end)
+
+MainSection:NewButton("Auto Get Gasoline", "Sells Gasoline", function()
+ while wait(.1) do
+game.ReplicatedStorage.Events.MaxFuelAction:FireServer(game.ReplicatedStorage.Values.Items.FuelTypes.gasoline, "sell")
+end
+end)
+
+MainSection:NewButton("Auto Do Task/Clean (OP ASF)", "Ez task", function()
+loadstring(game:HttpGet(('https://raw.githubusercontent.com/Averymoistboi/Gasstationman/main/instaplace'),true))()
+
+loadstring(game:HttpGet(('https://raw.githubusercontent.com/Averymoistboi/instaplaceBG/main/bocugs'),true))()
+end)
+
+ MainSection:NewSlider("INF Money", "OP MONEY", 100000, 0, function(v)
+game:GetService("Players").LocalPlayer.PlayerGui.GameUI.Stats.Bank.Bank.Text = v
+
+ end)
+
+
+MainSection:NewButton("INF Stamina", "INF STAMINA", function()
+game:GetService("Players").LocalPlayer.PlayerGui.GameUI.Stamina.Bar:Destroy()
+end)
+
+MainSection:NewButton("Remove Bills", "Remove Bills", function()
+game:GetService("Players").LocalPlayer.PlayerGui.GameUI.Stats.Bills.Bills.Text = "$0"
+end)
+
+MainSection:NewButton("Auto Kick customer ", "Kicks Them Out the Store", function()
+end)
+
+MainSection:NewButton("Auto Farm Cashier (Press L)", "Auto Farm (Press L To Turn On & Off)", function()
+    --- cashier + clean floor + stamina press L
+--variables
+local me = game.Players.LocalPlayer
+local tf = false
+local key = Enum.KeyCode.L
+
+--functions
+function stamina()
+    if me.PlayerGui.GameUI.Stamina.Bar.AbsoluteSize.X < 60 then
+        me.Character.HumanoidRootPart.CFrame = game:GetService("Workspace").Ceilings.Sofa.Seat.CFrame
+        wait(10)
+        me.Character.Humanoid.Sit = false -- unseat
+    end
+end
+
+function clean()
+    for _,v in pairs(game:GetService("Workspace"):GetChildren()) do
+         if v:FindFirstChild'Clean' then
+             game:GetService("ReplicatedStorage").Remote:FireServer('Clean', v.Clean)
+        end
+    end
+end
+
+--client sided button trigger
+game:GetService("ProximityPromptService").PromptShown:Connect(function(prompt)
+    if prompt.Name == 'Scan' then --check
+        fireproximityprompt(prompt) --fire
+    end
+end)
+
+--key input trigger
+game:GetService("UserInputService").InputBegan:Connect(function(input, chating)
+    if not chating and input.KeyCode == key then
+        tf = not tf
+    end
+end)
+
+--yes
+while wait(3) do
+    if tf then
+        clean()
+        stamina()
+        me.Character.HumanoidRootPart.CFrame = CFrame.new(1.46752572, 3, -6.53523779, 0.726744831, -4.74023416e-08, 0.68690753, 9.53963948e-08, 1, -3.19205924e-08, -0.68690753, 8.87266296e-08, 0.726744831)
+    end
+end
+--- script 2 refueler + buy fuel + stanima press L
+--variables
+local me = game.Players.localPlayer
+local tf = false
+local key = Enum.KeyCode.L
+
+--functions
+function refuel()
+    for _,v in pairs(workspace:GetChildren()) do
+        if string.sub(v.Name,1,4) == 'Car_' then
+            if v:FindFirstChild'Lid' then
+                if v.Lid:FindFirstChild'Refuel' then
+                    me.Character.HumanoidRootPart.CFrame = v.Lid.CFrame wait(1)
+                    for _,v2 in pairs(game:GetService("Workspace").Pumps:GetChildren()) do
+                        if me:DistanceFromCharacter(v2.Screen.Position) < 9 then
+                            game:GetService("ReplicatedStorage").Remote:FireServer("FuelCustomer", v, v2)
+                            game:GetService("ReplicatedStorage").Remote:FireServer("BuyItem", "Syntin Petrol Co", 1, "Station") --buy fuel
+                            break
+                        end
+                    end
+                elseif v.Lid:FindFirstChild'FinishFuel' then
+                    game:GetService("ReplicatedStorage").Remote:FireServer("FinishFuel", v, workspace.Pumps.Pump_Type1)
+                end
+            end
+        end
+    end
+end
+
+function stamina()
+    if me.PlayerGui.GameUI.Stamina.Bar.AbsoluteSize.X < 60 then
+        me.Character.HumanoidRootPart.CFrame = game:GetService("Workspace").Ceilings.Sofa.Seat.CFrame
+        wait(10)
+        me.Character.Humanoid.Sit = false -- unseat
+    end
+end
+
+--key input trigger
+game:GetService("UserInputService").InputBegan:Connect(function(input, chating)
+    if not chating and input.KeyCode == key then
+        tf = not tf
+    end
+end)
+
+--yes
+while wait(3) do
+    if tf then
+        refuel()
+        stamina()
+    end
+end
+end)
+
+MainSection:NewButton("AUTOFARM Refuel Cars (E) ", "Auto Farm (Press L To Turn On & Off)", function()
+--variables
+local me = game.Players.localPlayer
+local tf = false
+local key = Enum.KeyCode.E
+
+--functions
+function refuel()
+    for _,v in pairs(workspace:GetChildren()) do
+        if string.sub(v.Name,1,4) == 'Car_' then
+            if v:FindFirstChild'Lid' then
+                if v.Lid:FindFirstChild'Refuel' then
+                    me.Character.HumanoidRootPart.CFrame = v.Lid.CFrame wait(1)
+                    for _,v2 in pairs(game:GetService("Workspace").Pumps:GetChildren()) do
+                        if me:DistanceFromCharacter(v2.Screen.Position) < 9 then
+                            game:GetService("ReplicatedStorage").Remote:FireServer("FuelCustomer", v, v2)
+                            game:GetService("ReplicatedStorage").Remote:FireServer("BuyItem", "Syntin Petrol Co", 1, "Station") --buy fuel
+                            break
+                        end
+                    end
+                elseif v.Lid:FindFirstChild'FinishFuel' then
+                    game:GetService("ReplicatedStorage").Remote:FireServer("FinishFuel", v, workspace.Pumps.Pump_Type1)
+                end
+            end
+        end
+    end
+end
+
+function stamina()
+    if me.PlayerGui.GameUI.Stamina.Bar.AbsoluteSize.X < 60 then
+        me.Character.HumanoidRootPart.CFrame = game:GetService("Workspace").Ceilings.Sofa.Seat.CFrame
+        wait(10)
+        me.Character.Humanoid.Sit = false -- unseat
+    end
+end
+
+--key input trigger
+game:GetService("UserInputService").InputBegan:Connect(function(input, chating)
+    if not chating and input.KeyCode == key then
+        tf = not tf
+    end
+end)
+
+--yes
+while wait(3) do
+    if tf then
+        refuel()
+        stamina()
+    end
+end
+end)
+
+
+MainSection:NewButton("INF Jump", "INF Jump", function()
+game:GetService("UserInputService").JumpRequest:connect(function()
+	
+			game:GetService"Players".LocalPlayer.Character:FindFirstChildOfClass'Humanoid':ChangeState("Jumping")		
+	
+end)
+	end)
+
+MainSection:NewButton("Go To Spawn", "Teleports To Spawn", function()
+ game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-8.50800514, 3, 8.12928772, 0.720694125, -2.16092388e-09, -0.693253219, -2.1537081e-09, 1, -5.35603562e-09, 0.693253219, 5.35312816e-09, 0.720694125)
+end)
+
+ MainSection:NewSlider("Bypass Speed", "Bypassed Speed", 40, 16, function(v)
+if not getgenv().MTAPIMutex then if getgenv().MTAPIMutex~=nil then return end;local function a()if is_protosmasher_caller~=nil then return 0 end;if elysianexecute~=nil then return 1 end;if fullaccess~=nil then return 2 end;if Synapse~=nil then return 3 end;return 4 end;local function b()local c=a()if c==0 then return is_protosmasher_caller end;if c==1 or c==3 then return checkcaller end;if c==2 then return IsLevel7 end;return nil end;if a()==2 then error("mt-api: Exploit not supported")end;local d={}local e={}local f={}local g={}local h={}local i={}local j={}local k={}local function l()local m=a()local n=b()local o=getrawmetatable(game)if m==0 then make_writeable(o)elseif m==2 then fullaccess(o)else setreadonly(o,false)end;local p=o.__index;local q=o.__newindex;local r=o.__namecall;o.__index=newcclosure(function(s,t)if n()then return p(s,t)end;if d[s]and d[s][t]then local u=d[s][t]if u["IsCallback"]==true then return u["Value"](s)else return u["Value"]end end;if g[t]then local v=g[t]if v["IsCallback"]==true then return v["Value"](s)else return v["Value"]end end;if j[s]and j[s][t]then return k[s][t]end;return p(s,t)end)o.__newindex=newcclosure(function(w,x,y)if n()then return q(w,x,y)end;if e[w]and e[w][x]then local z=e[w][x]if z["Callback"]==nil then return else z["Callback"](w,y)return end end;if h[x]then local A=h[x]if A["Callback"]==nil then return else A["Callback"](w,y)return end end;if j[w]and j[w][x]then local B=j[w][x]if type(y)~=B["Type"]then error("bad argument #3 to '"..x.."' ("..B["Type"].." expected, got "..type(x)..")")end;k[w][x]=y;return end;return q(w,x,y)end)local C=isluau and isluau()or false;o.__namecall=newcclosure(function(D,...)local E={...}local F=C and getnamecallmethod()or table.remove(E)if n()then if F=="AddGetHook"then if#E<1 then error("mt-api: Invalid argument count")end;local G=E[1]local H=E[2]local I=E[3]if type(G)~="string"then error("mt-api: Invalid hook type")end;if not d[D]then d[D]={}end;if I==true and type(H)~="function"then error("mt-api: Invalid callback function")end;d[D][G]={Value=H,IsCallback=I}local J=function()d[D][G]=nil end;return{remove=J,Remove=J}end;if F=="AddGlobalGetHook"then local K=E[1]local L=E[2]local M=E[3]if type(K)~="string"then error("mt-api: Invalid hook type")end;if M==true and type(L)~="function"then error("mt-api: Invalid callback function")end;g[K]={Value=L,IsCallback=M}local N=function()g[K]=nil end;return{remove=N,Remove=N}end;if F=="AddSetHook"then if#E<1 then error("mt-api: Invalid argument count")end;local O=E[1]local P=E[2]if type(O)~="string"then error("mt-api: Invalid hook type")end;if not e[D]then e[D]={}end;if type(P)=="function"then e[D][O]={Callback=P}else e[D][O]={Callback=nil}end;local Q=function()e[D][O]=nil end;return{remove=Q,Remove=Q}end;if F=="AddGlobalSetHook"then if#E<1 then error("mt-api: Invalid argument count")end;local R=E[1]local S=E[2]if type(R)~="string"then error("mt-api: Invalid hook type")end;if type(S)=="function"then h[R]={Callback=S}else h[R]={Callback=nil}end;local T=function()h[R]=nil end;return{remove=T,Remove=T}end;if F=="AddCallHook"then if#E<2 then error("mt-api: Invalid argument count")end;local U=E[1]local V=E[2]if type(U)~="string"then error("mt-api: Invalid hook type")end;if type(V)~="function"then error("mt-api: Invalid argument #2 (not function)")end;if not f[D]then f[D]={}end;f[D][U]={Callback=V}local W=function()f[D][U]=nil end;return{remove=W,Remove=W}end;if F=="AddGlobalCallHook"then if#E<2 then error("mt-api: Invalid argument count")end;local X=E[1]local Y=E[2]if type(X)~="string"then error("mt-api: Invalid hook type")end;if type(Y)~="function"then error("mt-api: Invalid argument #2 (not function)")end;i[X]={Callback=Y}local Z=function()i[X]=nil end;return{remove=Z,Remove=Z}end;if F=="AddPropertyEmulator"then if#E<1 then error("mt-api: Invalid argument count")end;local _=E[1]if type(_)~="string"then error("mt-api: Invalid hook type")end;local a0=p(D,_)local a1=type(a0)if not j[D]then j[D]={}end;if not k[D]then k[D]={}end;j[D][_]={Type=a1}k[D][_]=p(D,_)local a2=function()j[D][_]=nil;k[D][_]=nil end;return{remove=a2,Remove=a2}end;return r(D,...)end;if f[D]and f[D][F]then local a3=f[D][F]return a3["Callback"](p(D,F),unpack(E))end;if i[F]then local a4=i[F]return a4["Callback"](D,p(D,F),unpack(E))end;return r(D,...)end)if m==0 then make_readonly(o)elseif m==2 then else setreadonly(o,true)end end;l()getgenv().MTAPIMutex=true end
+		game.Players.LocalPlayer.Character.Humanoid:AddPropertyEmulator("WalkSpeed")
+		game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = v
+  end)
+
+MainSection:NewButton("Fly (E)", "Toggle Fly With Button E", function()
+repeat wait() 
+	until game.Players.LocalPlayer and game.Players.LocalPlayer.Character and game.Players.LocalPlayer.Character:findFirstChild("HumanoidRootPart") and game.Players.LocalPlayer.Character:findFirstChild("Humanoid") 
+local mouse = game.Players.LocalPlayer:GetMouse() 
+repeat wait() until mouse
+local plr = game.Players.LocalPlayer 
+local torso = plr.Character.HumanoidRootPart 
+local flying = true
+local deb = true 
+local ctrl = {f = 0, b = 0, l = 0, r = 0} 
+local lastctrl = {f = 0, b = 0, l = 0, r = 0} 
+local maxspeed = 50 
+local speed = 0 
+
+function Fly() 
+local bg = Instance.new("BodyGyro", torso) 
+bg.P = 9e4 
+bg.maxTorque = Vector3.new(9e9, 9e9, 9e9) 
+bg.cframe = torso.CFrame 
+local bv = Instance.new("BodyVelocity", torso) 
+bv.velocity = Vector3.new(0,0.1,0) 
+bv.maxForce = Vector3.new(9e9, 9e9, 9e9) 
+repeat wait() 
+plr.Character.Humanoid.PlatformStand = true 
+if ctrl.l + ctrl.r ~= 0 or ctrl.f + ctrl.b ~= 0 then 
+speed = speed+.5+(speed/maxspeed) 
+if speed > maxspeed then 
+speed = maxspeed 
+end 
+elseif not (ctrl.l + ctrl.r ~= 0 or ctrl.f + ctrl.b ~= 0) and speed ~= 0 then 
+speed = speed-1 
+if speed < 0 then 
+speed = 0 
+end 
+end 
+if (ctrl.l + ctrl.r) ~= 0 or (ctrl.f + ctrl.b) ~= 0 then 
+bv.velocity = ((game.Workspace.CurrentCamera.CoordinateFrame.lookVector * (ctrl.f+ctrl.b)) + ((game.Workspace.CurrentCamera.CoordinateFrame * CFrame.new(ctrl.l+ctrl.r,(ctrl.f+ctrl.b)*.2,0).p) - game.Workspace.CurrentCamera.CoordinateFrame.p))*speed 
+lastctrl = {f = ctrl.f, b = ctrl.b, l = ctrl.l, r = ctrl.r} 
+elseif (ctrl.l + ctrl.r) == 0 and (ctrl.f + ctrl.b) == 0 and speed ~= 0 then 
+bv.velocity = ((game.Workspace.CurrentCamera.CoordinateFrame.lookVector * (lastctrl.f+lastctrl.b)) + ((game.Workspace.CurrentCamera.CoordinateFrame * CFrame.new(lastctrl.l+lastctrl.r,(lastctrl.f+lastctrl.b)*.2,0).p) - game.Workspace.CurrentCamera.CoordinateFrame.p))*speed 
+else 
+bv.velocity = Vector3.new(0,0.1,0) 
+end 
+bg.cframe = game.Workspace.CurrentCamera.CoordinateFrame * CFrame.Angles(-math.rad((ctrl.f+ctrl.b)*50*speed/maxspeed),0,0) 
+until not flying 
+ctrl = {f = 0, b = 0, l = 0, r = 0} 
+lastctrl = {f = 0, b = 0, l = 0, r = 0} 
+speed = 0 
+bg:Destroy() 
+bv:Destroy() 
+plr.Character.Humanoid.PlatformStand = false 
+end 
+mouse.KeyDown:connect(function(key) 
+if key:lower() == "e" then 
+if flying then flying = false 
+else 
+flying = true 
+Fly() 
+end 
+elseif key:lower() == "w" then 
+ctrl.f = 1 
+elseif key:lower() == "s" then 
+ctrl.b = -1 
+elseif key:lower() == "a" then 
+ctrl.l = -1 
+elseif key:lower() == "d" then 
+ctrl.r = 1 
+end 
+end) 
+mouse.KeyUp:connect(function(key) 
+if key:lower() == "w" then 
+ctrl.f = 0 
+elseif key:lower() == "s" then 
+ctrl.b = 0 
+elseif key:lower() == "a" then 
+ctrl.l = 0 
+elseif key:lower() == "d" then 
+ctrl.r = 0 
+end 
+end)
+Fly()
+end)
+        
+        
+        local Teleports = Window:NewTab("Teleports")
+        local TeleportsSection = Teleports:NewSection("Teleports")
+ 
+ TeleportsSection:NewButton("Go To Solar Panels", "Teleports To Solar Panels", function()
+ game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-61.9353142, 0.46874994, -18.1901302, -0.999561071, -7.04101444e-10, 0.0296250191, -1.04603892e-09, 1, -1.15266863e-08, -0.0296250191, -1.15526166e-08, -0.999561071)
+end)     
+
+ TeleportsSection:NewButton("Go To Gas 1", "Teleports To Gas 1", function()
+ game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(4.69986296, 0.999999881, 18.0363865, -0.403280765, -2.59599187e-08, -0.915076315, -1.66826908e-08, 1, -2.10169482e-08, 0.915076315, 6.7902044e-09, -0.403280765)
+end)     
+
+TeleportsSection:NewButton("Go To Gas 2", "Teleports To Gas 2", function()
+ game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-25.3300552, 0.999999762, 18.1304188, -0.448519796, 1.09648068e-08, 0.8937729, -2.87055002e-08, 1, -2.66732094e-08, -0.8937729, -3.76196603e-08, -0.448519796)
+end)    
+
+TeleportsSection:NewButton("Go To Gas 3", "Teleports To Gas 2", function()
+ game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(1.7871213, 0.999999762, 34.3536034, -0.56451112, -3.38758674e-08, -0.825425446, 2.93556535e-09, 1, -4.30481357e-08, 0.825425446, -2.67242406e-08, -0.56451112)
+end) 
+
+TeleportsSection:NewButton("Go To Gas 4", "Teleports To Gas 2", function()
+ game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-24.7187157, 1, 29.1104908, -0.715898931, 6.96512501e-08, 0.698203921, 3.85873484e-08, 1, -6.01924626e-08, -0.698203921, -1.61498814e-08, -0.715898931)
+end) 
+
+        TeleportsSection:NewButton("Go Into Store", "Teleports To Store", function()
+ game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-7.47835732, 3.00000095, -13.5392361, 0.999309003, 1.87053075e-08, 0.0371695273, -2.00095567e-08, 1, 3.47171962e-08, -0.0371695273, -3.54369512e-08, 0.999309003)
+end)
+
+TeleportsSection:NewButton("Go To Cashier Area", "Teleports To Cashier", function()
+ game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(1.96974945, 3.00000048, -5.29026318, 0.642732978, 3.49905136e-08, 0.766090274, -2.58305644e-08, 1, -2.40028619e-08, -0.766090274, -4.3611128e-09, 0.642732978)
+end)
+
+TeleportsSection:NewButton("Go To Office Area", "Teleports To Office", function()
+ game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-5.10715532, 3, -41.8562355, 0.0198104233, -8.24889241e-08, 0.999803782, -1.07648876e-08, 1, 8.27184152e-08, -0.999803782, -1.24014621e-08, 0.0198104233)
+end)
+
+TeleportsSection:NewButton("Go To Back Room", "Teleports To Back Room", function()
+ game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(25.1457615, 3, -43.968605, 0.177794412, -4.81613727e-09, -0.984067678, -1.37459724e-08, 1, -7.37763761e-09, 0.984067678, 1.48386698e-08, 0.177794412)
+end)
+
+TeleportsSection:NewButton("Rejoin Server", "Rejoin Server", function()
+    game:GetService("TeleportService"):Teleport(9359839118, LocalPlayer)
+end)
+
+TeleportsSection:NewButton("New Server", "New Server", function()
+    game:GetService("TeleportService"):Teleport(9359839118, LocalPlayer)
+end)
+
+
+local More = Window:NewTab("More")
+        local MoreSection = More:NewSection("More")
+        
+MoreSection:NewTextBox("HEAD HEIGHT FE", "Type HERE!", function(v)
+Head_Height = v
+
+
+_=wait
+AnimationId="121572214"
+A=Instance.new("Animation")
+A.AnimationId="rbxassetid://"..AnimationId
+k=game:GetService("Workspace")[game:GetService("Players").LocalPlayer.Name]:FindFirstChild("Humanoid"):LoadAnimation(A)
+k:Play()
+k:AdjustSpeed(1)
+_(Head_Height*.0053125)
+k:AdjustSpeed(0)
+end)
+     
+
+        MoreSection:NewButton("Infinite Yield Admin", "New Server", function()
+  loadstring(game:HttpGet('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'))()
+end)
+
+MoreSection:NewSlider("HipHeight", "Increase Height", 25, 0, function(v)
+Float_Height = v -- Your float height | 5 is default
+
+local i=1
+G=game;
+_=wait;
+p=G:GetService("Players").LocalPlayer.Character
+p:FindFirstChild("Humanoid").HipHeight = Float_Height
+for i=1,i do
+repeat p:FindFirstChild("Humanoid").HipHeight=Float_Height-n _(t)p:FindFirstChild("Humanoid").HipHeight=Float_Height+n _(t) until
+p:FindFirstChild("Humanoid").Health == 0
+end
+ end)
+
+MoreSection:NewButton("Open Shop", "Opens Shop", function()
+  game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(29.5111122, 3.41828251, -49.0447197, -0.00353717804, 0, 0.999993742, 0, 1, 0, -0.999993742, 0, -0.00353717804)
+
+end)
+
+ MoreSection:NewButton("REMOVE SKY SO GOOD", "SO CLEAR", function()
+game.Lighting['SunRays']:Destroy()
+game.Lighting['Bloom']:Destroy()
+game.Lighting['Blur']:Destroy()
+game.Lighting['Atmosphere']:Destroy()
+end)
+
+MainSection:NewButton("Reset Player", "Reset", function()
+    game.Players.LocalPlayer.Character.Humanoid.Health = 0
+end)
+       
+    
+        local Credits = Window:NewTab("Credits")
+        local CreditsSection = Credits:NewSection("Credits")
+        
+        CreditsSection:NewLabel("Made By: Legend HandlesYT")
+        
